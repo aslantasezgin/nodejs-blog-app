@@ -10,7 +10,7 @@ const adminRoutes = require("./routes/admin")
 blogApp.use("/libs", express.static("node_modules"))
 blogApp.use("/pub",express.static("public"))
 
-blogApp.use(adminRoutes)
+blogApp.use("/admin", adminRoutes)
 blogApp.use(userRoutes)
 
 

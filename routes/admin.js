@@ -2,15 +2,15 @@ const express = require("express")
 const router = express.Router()
 const path = require("path")
 
-router.use("/admin/blog/create",function(request, response, next){
+router.use("/blog/create",function(request, response, next){
 response.sendFile(path.join(__dirname, "../views/admin", "blog-create.html"))
 })
 
-router.use("/admin/blogs/:id",function(request, response, next){
+router.use("/blogs/:id",function(request, response, next){
     response.sendFile(path.join(__dirname, "../views/admin", "blog-edit.html"))
     })
 
-router.use("/admin/blogs/",function(request, response, next){
+router.use("/blogs/",function(request, response, next){
 response.sendFile(path.join(__dirname, "../views/admin", "blog-list.html"))
 })
 

@@ -5,6 +5,8 @@ const blogApp = express()
 
 const path = require("path")
 
+blogApp.use("/libs", express.static("node_modules"))
+blogApp.use("/pub",express.static("public"))
 
 blogApp.use("/blogs/:id",function(request, response, next){
 

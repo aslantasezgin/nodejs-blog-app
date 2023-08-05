@@ -3,20 +3,23 @@ const express = require("express")
 const blogApp = express()
 
 
-blogApp.use(function(request, response, next){
-    console.log("middleware1")
-    next()
+blogApp.use("/blogs/:id",function(request, response, next){
+    console.log(request.params)
+    response.send("Blog Detay Sayfası" + " " + request.params.id)
 })
 
-blogApp.use(function(request, response, next){
-    next()
-
+blogApp.use("/blogs",function(request, response, next){
+    response.send("Blogs")
 })
 
-blogApp.use(function(request, response){
-    
-    response.send("<h1>homepagex </h1>")
- })
+blogApp.use("/",function(request, response, next){
+    response.send("Anasayfa")
+})
+
+
+
+
+
  
 
 blogApp.listen(3000, function () {

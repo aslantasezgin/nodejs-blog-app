@@ -3,15 +3,15 @@ const router = express.Router()
 const path = require("path")
 
 router.use("/blog/create",function(request, response, next){
-response.sendFile(path.join(__dirname, "../views/admin", "blog-create.html"))
+response.render("admin/blog-create")
 })
 
 router.use("/blogs/:id",function(request, response, next){
-    response.sendFile(path.join(__dirname, "../views/admin", "blog-edit.html"))
+    response.render("admin/blog-edit")
     })
 
 router.use("/blogs/",function(request, response, next){
-response.sendFile(path.join(__dirname, "../views/admin", "blog-list.html"))
+response.render("admin/blog-list" )
 })
 
 

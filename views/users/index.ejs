@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="/libs/bootstrap/dist/css/bootstrap.min.css">
-    <title>Anasayfa</title>
+    <title><%=title%> - BlogApp</title>
 </head>
 <body>
 
@@ -31,16 +31,22 @@
     <div class="row">
     <div class="col-md-3">
     <div class="list-group">
-    <a href="" class="list-group-item list-group-item-action" active>Web Geliştirme</a>
-    <a href="" class="list-group-item list-group-item-action" >Mobil Uygulama</a>
-    <a href="" class="list-group-item list-group-item-action" >Veri Analizi</a>
-    <a href="" class="list-group-item list-group-item-action" >Programlama</a>
+    <!-- <% for( let i = 0; i < categories.length; i++ ) { %>
+     <a href="" class="list-group-item list-group-item-action" active><%= categories[i] %></a>
+    <% } %> -->
+
+    <% categories.forEach(function(category){ %>
+        <a href="" class="list-group-item list-group-item-action" active><%= category %></a>
+    <% }) %>
 
     </div>
     </div>
 
     <div class="col-md-9">
-    <h3 class="mt-1 mb-2">Anasayfa</h3>
+    <h3 class="mt-1 mb-2">
+     <%=title%>   
+     
+    </h3>
     <div class="card mb-3">
     <div class="row">
 

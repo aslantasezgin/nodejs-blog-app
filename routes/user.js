@@ -3,16 +3,21 @@ const router = express.Router()
 const path = require("path")
 
 
-router.use("/blogs/:id",function(request, response, next){
-response.sendFile(path.join(__dirname, "../views/users", "blog-details.html"))
+const data ={
+title:"Popüler Kurslar",
+categories:["Web Geliştirme", "Programlama", "Mobil Uygulamalar", "Veri Analizi", "Ofis Uygulamaları"] 
+}
+
+router.use("/blogs/:id",function(request, response){
+response.render("users/blog-details")
 })
     
-router.use("/blogs",function(request, response, next){
-response.sendFile(path.join(__dirname, "../views/users", "blogs.html"))
+router.use("/blogs",function(request, response){
+response.render("users/blogs")
 })
     
-router.use("/",function(request, response, next){
-response.sendFile(path.join(__dirname, "../views/users", "index.html"))
+router.use("/",function(request, response){
+response.render("users/index", data)
 })
 
 module.exports = router

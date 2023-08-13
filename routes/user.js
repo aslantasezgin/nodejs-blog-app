@@ -6,7 +6,22 @@ const db = require("../data/db")
 
 
 
-
+router.use("/blogs/category/:categoryid", async function(request,response){
+ const id = request.params.categoryid
+ try{
+  const [blogs,] = await db.execute("select * from blog where categoryId=?",[id])
+  const [categories,] = await db.execute("select * from category")
+    
+  response.render("users/blogs",{
+    title:"Tüm Kurslar",
+    blogs:blogs,
+    categories:categories  
+  })
+ }
+ catch(err){
+  console.log(err)
+ }
+})
 
 router.use("/blogs/:id",async function(request, response){
 const id = request.params.id;

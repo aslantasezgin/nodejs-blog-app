@@ -1,11 +1,30 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Blog Detay Sayfası</title>
+    <%- include('../partials/head') %>
 </head>
 <body>
-    
+
+    <%- include('../partials/nav') %>
+
+
+    <div class="container mt-3">
+    <div class="row">
+    <div class="col-md-4">
+    <img src="/pub/images/<%=blog.blogIMG%>" class="img-fluid">
+    </div>
+
+    <div class="col-md-8">
+    <h3 class="mt-1 mb-2"><%=blog.blogTitle%></h3>
+    <p><%=blog.blogDescription  %></p>
+   
+ 
+
+    </div>
+
+    </div>
+    </div>
+
+
 </body>
 </html>

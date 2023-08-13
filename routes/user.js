@@ -8,8 +8,24 @@ const db = require("../data/db")
 
 
 
-router.use("/blogs/:id",function(request, response){
-response.render("users/blog-details")
+router.use("/blogs/:id",async function(request, response){
+const id = request.params.id;
+try{
+    const [blog,] = await db.execute("select * from blog where id=?",[id])
+    if(blog[0]){
+     return response.render("users/blog-details", {
+        title:blog[0].blogTitle,
+        blog: blog[0]
+       })
+    }
+    response.redirect("/")
+  
+}
+catch(err){
+    console.log(err)
+}
+
+
 })
     
 

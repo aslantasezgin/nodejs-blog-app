@@ -6,38 +6,6 @@ const db = require("../data/db")
 
 
 
-const data ={
-title:"Popüler Kurslar",
-categories:["Web Geliştirme", "Programlama", "Mobil Uygulamalar", "Veri Analizi", "Ofis Uygulamaları"],
-blogs:[
-{
-id:1,
-blogTitle:"Web Geliştirme 101",
-blogDescription:"Lorem ipsum dolor sit amet consectetur adipisicing elit. Quos, debitis.",
-blogImg:"1.jpeg",
-isFeatured:true,
-isAgree:true,
-},
-{
-id:2,
-blogTitle:"Web Geliştirme 201",
-blogDescription:"Lorem ipsum dolor sit amet consectetur adipisicing elit. Quos, debitis.",
-blogImg:"2.jpeg",
-isFeatured:true,
-isAgree:false,
-
-},
-{
-id:3,
-blogTitle:"Web Geliştirme 301",
-blogDescription:"Lorem ipsum dolor sit amet consectetur adipisicing elit. Quos, debitis.",
-blogImg:"3.jpeg",
-isFeatured:false,
-isAgree:true,
-},
-]
-}
-
 
 
 router.use("/blogs/:id",function(request, response){
@@ -45,38 +13,43 @@ response.render("users/blog-details")
 })
     
 
-router.use("/blogs",function(request, response){
-    db.execute("select * from blog where isAgree=1")
-    .then(result => {
-        db.execute("select * from category")
-        .then(res => {
-          
-            response.render("users/index", {
-                title:"Tüm Kurslar",
-                blogs: result[0],
-                categories: res[0],
-        })
-        })
-        .catch(err => console.log(err))
-        })
-        .catch(err => console.log(err))
+router.use("/blogs",async function(request, response){
+
+    try{
+    const [blogs] = await db.execute("select * from blog where isAgree=1")
+    const [categories,] = await db.execute("select * from category")
+    
+    response.render("users/blogs",{
+      title:"Tüm Kurslar",
+      blogs:blogs,
+      categories:categories  
+    })
+
+    }
+    
+    catch(err){
+    console.log(err)
+    }
+
+
     })
     
-router.use("/",function(request, response){
-db.execute("select * from blog where isAgree=1 && isFeatured=1")
-.then(result => {
-db.execute("select * from category")
-.then(res => {
-  
-    response.render("users/index", {
-        title:"Popüler Kurslar",
-        blogs: result[0],
-        categories: res[0],
-})
-})
-.catch(err => console.log(err))
-})
-.catch(err => console.log(err))
+router.use("/",async function(request, response){
+    try{
+        const [blogs] = await db.execute("select * from blog where isAgree=1 && isFeatured=1")
+        const [categories,] = await db.execute("select * from category")
+        
+        response.render("users/index",{
+          title:"Popüler Kurslar",
+          blogs:blogs,
+          categories:categories  
+        })
+    
+        }
+        
+        catch(err){
+        console.log(err)
+        }
 })
 
 module.exports = router

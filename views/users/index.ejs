@@ -10,17 +10,11 @@
 
     <div class="container mt-3">
     <div class="row">
+
     <div class="col-md-3">
-    <div class="list-group">
-    <!-- <% for( let i = 0; i < categories.length; i++ ) { %>
-     <a href="" class="list-group-item list-group-item-action" active><%= categories[i] %></a>
-    <% } %> -->
 
-    <% categories.forEach(function(category){ %>
-        <a href="" class="list-group-item list-group-item-action" active><%= category %></a>
-    <% }) %>
+    <%- include('../partials/category-menu', categories) %>
 
-    </div>
     </div>
 
     <div class="col-md-9">
@@ -34,25 +28,7 @@
     blogs.forEach(function(blog){ %>
     
         <% if(blog.isFeatured && blog.isAgree){%>
-            <div class="card mb-3">
-    <div class="row">
-    <div class="col-md-3">
-    <img src="/pub/images/<%=blog.blogImg%>" class="img-fluid">
-    </div>
-
-    <div class="col-md-9">
-    <div class="card-body">
-    <h5 class="card-title"><%=blog.blogTitle%></h5>
-    <p class="card-text"><%=blog.blogDescription%></p>
-    
-    </div>
-    </div>
-
-    
-
-    </div>
-    </div>
-
+        <%- include('../partials/blog-card', blog) %>
         <% } %>
 
     

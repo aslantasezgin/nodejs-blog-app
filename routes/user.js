@@ -48,23 +48,33 @@ response.render("users/blog-details")
 router.use("/blogs",function(request, response){
     db.execute("select * from blog where isAgree=1")
     .then(result => {
-    response.render("users/blogs", {
-    title:"Popüler Kurslar",
-    blogs: result[0],
-    categories: data.categories,
-    })
-    })
-    .catch(err => console.log(err))
+        db.execute("select * from category")
+        .then(res => {
+          
+            response.render("users/index", {
+                title:"Tüm Kurslar",
+                blogs: result[0],
+                categories: res[0],
+        })
+        })
+        .catch(err => console.log(err))
+        })
+        .catch(err => console.log(err))
     })
     
 router.use("/",function(request, response){
 db.execute("select * from blog where isAgree=1 && isFeatured=1")
 .then(result => {
-response.render("users/index", {
-title:"Popüler Kurslar",
-blogs: result[0],
-categories: data.categories,
+db.execute("select * from category")
+.then(res => {
+  
+    response.render("users/index", {
+        title:"Popüler Kurslar",
+        blogs: result[0],
+        categories: res[0],
 })
+})
+.catch(err => console.log(err))
 })
 .catch(err => console.log(err))
 })

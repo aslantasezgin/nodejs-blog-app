@@ -2,13 +2,8 @@ const express = require("express")
 const blogApp = express()
 
 const mysql = require("mysql2")
-
-let connection = mysql.createConnection({
-host:"localhost",
-user:"root",
-password:"Aslanta261021",
-database:"blogdb"
-})
+const config = require("./config")
+let connection = mysql.createConnection(config.db)
 
 connection.connect((err) => {
     if(err){

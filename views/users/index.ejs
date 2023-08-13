@@ -24,17 +24,17 @@
     </h3>
     
 
+  
     <% 
     blogs.forEach(function(blog){ %>
     
-        <% if(blog.isFeatured && blog.isAgree){%>
+     
         <%- include('../partials/blog-card', blog) %>
-        <% } %>
+ 
 
     
    
    <% }) %>
-
 
  
 

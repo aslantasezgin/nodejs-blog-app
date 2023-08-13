@@ -1,17 +1,7 @@
 const express = require("express")
 const blogApp = express()
 
-const mysql = require("mysql2")
-const config = require("./config")
-let connection = mysql.createConnection(config.db)
 
-connection.connect((err) => {
-    if(err){
-        console.log(error)
-    }else{
-        console.log("success connection")
-    }
-})
 
 
 blogApp.set("view engine", "ejs")

@@ -2,6 +2,9 @@ const express =require("express")
 const router = express.Router()
 const path = require("path")
 
+const db = require("../data/db")
+
+
 
 const data ={
 title:"Popüler Kurslar",
@@ -35,16 +38,35 @@ isAgree:true,
 ]
 }
 
+
+
 router.use("/blogs/:id",function(request, response){
 response.render("users/blog-details")
 })
     
+
 router.use("/blogs",function(request, response){
-response.render("users/blogs", data)
-})
+    db.execute("select * from blog where isAgree=1")
+    .then(result => {
+    response.render("users/blogs", {
+    title:"Popüler Kurslar",
+    blogs: result[0],
+    categories: data.categories,
+    })
+    })
+    .catch(err => console.log(err))
+    })
     
 router.use("/",function(request, response){
-response.render("users/index", data)
+db.execute("select * from blog where isAgree=1 && isFeatured=1")
+.then(result => {
+response.render("users/index", {
+title:"Popüler Kurslar",
+blogs: result[0],
+categories: data.categories,
+})
+})
+.catch(err => console.log(err))
 })
 
 module.exports = router

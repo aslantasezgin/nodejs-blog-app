@@ -20,13 +20,11 @@
     
 
     <% blogs.forEach(function(blog){ %>
-        <% if(blog.isAgree){%>
     <%- include('../partials/blog-card', blog) %>
-        <% } %>
-   <% }) %>
+    <% }) %>
 
 
-   <% if(blogs.filter(blog => blog.isAgree).length > 3){%>
+   <% if(blogs.length > 3){%>
     <%- include("../partials/pagination") -%>
    <% } %>
 
